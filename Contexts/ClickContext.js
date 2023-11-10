@@ -30,7 +30,7 @@ export function ClickContextProvider ({children}) {
     return (
         //value passed into the Provider is taken from the variables a 1.0)
         <OnClickContext.Provider value={clickMultiplier}>
-            <UpdateOnClickContext.Provider value={updateClicks} >
+            <UpdateOnClickContext.Provider value={setClickMultiplier} >
                 {children}
             </UpdateOnClickContext.Provider>
         </OnClickContext.Provider>

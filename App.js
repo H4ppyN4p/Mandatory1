@@ -2,9 +2,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //Context
-import {ClickContextProvider} from './ClickContext'
-import { AutoClickContextProvider } from "./AutoClickContext";
-
+//import {ClickContextProvider} from '.Contexts/ClickContext'
+//import { AutoClickContextProvider } from ".Contexts/AutoClickContext";
+import { ClickContextProvider } from "./Contexts/ClickContext";
+import { AutoClickContextProvider } from "./Contexts/AutoClickContext";
+import { PointsContextProvider } from "./Contexts/PointsContext";
 //components
 import Click from "./Click";
 import Upgrades from "./Upgrades";
@@ -16,6 +18,7 @@ const App = () => {
   return (
     <ClickContextProvider>
       <AutoClickContextProvider>
+        <PointsContextProvider>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Click" >
             
@@ -24,6 +27,8 @@ const App = () => {
 
           </Stack.Navigator>  
         </NavigationContainer>
+
+        </PointsContextProvider>
       </AutoClickContextProvider>
     </ClickContextProvider>
   )

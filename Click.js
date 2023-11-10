@@ -3,31 +3,30 @@ import { useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
 //Context
-import { useClicks, useClicksUpdate } from './ClickContext';
-import { useAutoClicks, useAutoClicksUpdate } from './AutoClickContext';
+import { useClicks, useClicksUpdate } from './Contexts/ClickContext';
+import { useAutoClicks, useAutoClicksUpdate } from './Contexts/AutoClickContext';
+import {usePointsState, useSetPointState} from './Contexts/PointsContext';
 
 
 const Click = ({navigation}) => {
 
     const clickMultiplier = useClicks()
-    const increaseClickMultiplier = useClicksUpdate()
 
     const autoClickMultiplier = useAutoClicks()
-    const increaseAutoClickMultiplier = useAutoClicksUpdate()
 
-
-    const [clicks, setClicks] = useState(0)
+    const points = usePointsState();
+    const setPoints = useSetPointState()
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setClicks(clicks + (1 * autoClickMultiplier))
+            setPoints(points + (1 * autoClickMultiplier))
     }, 1000);
 
         return () => clearInterval(interval);
     })
 
     function updateClicks() {
-        setClicks(clicks + (1 * clickMultiplier))
+        setPoints(points + (1 * clickMultiplier))
     }
 
  
@@ -38,7 +37,7 @@ const Click = ({navigation}) => {
           title='click me'
           onPress={updateClicks}
         />
-        <Text>You have clicked {clicks} times</Text>
+        <Text>You have {points} points</Text>
         
         <Text></Text>
         
