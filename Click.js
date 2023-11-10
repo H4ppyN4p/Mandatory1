@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 
 //Context
 import { useClicks, useClicksUpdate } from './ClickContext';
+import { useAutoClicks, useAutoClicksUpdate } from './AutoClickContext';
 
 
 const Click = ({navigation}) => {
@@ -11,7 +12,9 @@ const Click = ({navigation}) => {
     const clickMultiplier = useClicks()
     const increaseClickMultiplier = useClicksUpdate()
 
-    const autoClickMultiplier = 1
+    const autoClickMultiplier = useAutoClicks()
+    const increaseAutoClickMultiplier = useAutoClicksUpdate()
+
 
     const [clicks, setClicks] = useState(0)
 
@@ -31,21 +34,20 @@ const Click = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
         <Button 
-        title='click me'
-        onPress={updateClicks}
+          title='click me'
+          onPress={updateClicks}
         />
         <Text>You have clicked {clicks} times</Text>
-        <Text>Current click value is {clickMultiplier}</Text>
-        <Button 
-        title='increase click value'
-        onPress={increaseClickMultiplier}
-        />
+        
+        <Text></Text>
+        
 
+        <Text></Text>
         <Button 
-        title='Go to upgrades'
-        onPress={() => navigation.navigate('Upgrades')}
+          title='Go to upgrades'
+          onPress={() => navigation.navigate('Upgrades')}
+
         />
         <StatusBar style="auto" />
     </View>

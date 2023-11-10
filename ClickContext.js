@@ -1,15 +1,15 @@
 import { createContext, useContext, useState } from "react";
 
-//Create the contexts to use
+//Create a context
 const OnClickContext = createContext()
-const UpdateOnClickContext = createContext()
-
-//Access the first context - the UseState 
+//Create custom hook to access that context
 export function useClicks() {
     return useContext(OnClickContext)
 }
 
-//Access the second context - updating the UseState
+//Creates another context
+const UpdateOnClickContext = createContext()
+//Creates another custom hook to access the data in the context
 export function useClicksUpdate() {
     return useContext(UpdateOnClickContext)
 }
@@ -17,15 +17,19 @@ export function useClicksUpdate() {
 
 //Create the provider to access later
 export function ClickContextProvider ({children}) {
-    const [onClickMultiplier, setOnClickMultiplier] = useState(1)
+
+    //1.0) 
+    //These values before the return part can be passed on to the provider for later usage
+    const [clickMultiplier, setClickMultiplier] = useState(1)
 
     function updateClicks(){
-        setOnClickMultiplier(onClickMultiplier + 1)
+        setClickMultiplier(clickMultiplier + 1)
     }
 
     //The values to be returned from the provider
     return (
-        <OnClickContext.Provider value={onClickMultiplier}>
+        //value passed into the Provider is taken from the variables a 1.0)
+        <OnClickContext.Provider value={clickMultiplier}>
             <UpdateOnClickContext.Provider value={updateClicks} >
                 {children}
             </UpdateOnClickContext.Provider>

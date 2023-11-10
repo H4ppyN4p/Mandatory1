@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //Context
 import {ClickContextProvider} from './ClickContext'
+import { AutoClickContextProvider } from "./AutoClickContext";
 
 //components
 import Click from "./Click";
@@ -14,14 +15,16 @@ const App = () => {
 
   return (
     <ClickContextProvider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Click" >
-          
-          <Stack.Screen name="Click" component={Click} />
-          <Stack.Screen name="Upgrades" component={Upgrades} />
+      <AutoClickContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Click" >
+            
+            <Stack.Screen name="Click" component={Click} />
+            <Stack.Screen name="Upgrades" component={Upgrades} />
 
-        </Stack.Navigator>  
-      </NavigationContainer>
+          </Stack.Navigator>  
+        </NavigationContainer>
+      </AutoClickContextProvider>
     </ClickContextProvider>
   )
 }
