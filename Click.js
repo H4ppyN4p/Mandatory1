@@ -3,8 +3,8 @@ import { useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
 //Context
-import { useClicks, useClicksUpdate } from './Contexts/ClickContext';
-import { useAutoClicks, useAutoClicksUpdate } from './Contexts/AutoClickContext';
+import { useClicks, useClicksUpdate, useAutoClicks, useAutoClicksUpdate } from './Contexts/ClickContext';
+//import { useAutoClicks, useAutoClicksUpdate } from './Contexts/UpgradeContext';
 import {usePointsState, useSetPointState} from './Contexts/PointsContext';
 
 
