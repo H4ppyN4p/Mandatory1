@@ -1,15 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect} from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 
 //Context
 import { useClicks, useClicksUpdate, useAutoClicks, useAutoClicksUpdate } from './Contexts/ClickContext';
 //import { useAutoClicks, useAutoClicksUpdate } from './Contexts/UpgradeContext';
 import {usePointsState, useSetPointState} from './Contexts/PointsContext';
 
+//firebase
+import { app, database } from './firebase'
+import { useCollection } from 'react-firebase-hooks/firestore'
+import { collection, doc } from "firebase/firestore";
+
 
 const Click = ({navigation}) => {
 
+
+      
+    const [values, loading, error] = useCollection(collection(database, 'Clicker'))
+    const data = values?.docs.map((doc) => ({...doc.data(), id: doc.id}))
+
+
+    
     const clickMultiplier = useClicks()
 
     const autoClickMultiplier = useAutoClicks()
@@ -49,6 +61,8 @@ const Click = ({navigation}) => {
 
         />
         <StatusBar style="auto" />
+    
+       
     </View>
   );
 }

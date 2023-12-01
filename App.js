@@ -9,9 +9,17 @@ import { UpgradeContextProvider } from "./Contexts/UpgradeContext";
 import Click from "./Click";
 import Upgrades from "./Upgrades";
 
+//firebase
+import { app, database } from './firebase'
+import { useCollection } from 'react-firebase-hooks/firestore'
+import { collection, doc } from "firebase/firestore";
+
 const App = () => {
 
+
+  //alert(values)
   const Stack = createNativeStackNavigator()
+  
 
   return (
     <ClickContextProvider>

@@ -1,5 +1,10 @@
 import { useState, useContext, createContext } from "react";
 
+//Firebase
+import { app, database } from "../firebase";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { collection, doc } from "firebase/firestore";
+
 const ClickerUpgradeCostState = createContext()
 export function clickerCostState(){
     return useContext(ClickerUpgradeCostState)
@@ -24,8 +29,33 @@ export function autoClickerSetCostState(){
 
 export function UpgradeContextProvider({children}){
 
+    const [values, loading, error] = useCollection(collection(database, 'Clicker'))
+    const data = values?.docs.map((doc) => ({...doc.data(), id: doc.id}))
+
+    const [hasRunFunction, setHasRunFunction] = useState(false)
+    
     const [clickerCost, setClickerCost] = useState(5)
     const [autoClickerCost, setAutoClickerCost] = useState(30)
+
+    function setValueFunc(){
+        try{
+            setClickerCost(data[0].clickerCostVal)
+            setAutoClickerCost(data[0].autoClickerCostVal)
+            console.log('it worked? - costs')
+        } catch (e) {
+            console.log('didnt work - costs')
+        }
+        setHasRunFunction(true)
+    }
+
+    if (hasRunFunction){
+
+    } else {
+        setTimeout(() => {
+            setValueFunc()
+        }, 2000)
+    }
+
 
     return(
         <ClickerUpgradeCostState.Provider value={clickerCost}>
